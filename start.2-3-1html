@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-3-1 · 由陣列渲染一份清單</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2em; }
+  </style>
+</head>
+<body>
+  <h1>菜單</h1>
+  <ul id="menu"></ul>
+
+  <script>
+    // WIREFRAME — data in, HTML out:
+    //
+    //   menu array -> map(`<li>item - $price</li>`) -> join("") -> innerHTML
+    //
+    //   then in the Console:
+    //     menu.push({ item: "摩卡", price: 140 }); renderMenu(menu);
+    //   -> list updates: view is a projection of data
+
+    // TODO 1: 準備一個 menu 陣列（含 item / price 兩個欄位, 兩三筆就好）
+
+    // TODO 2: 寫 renderMenu(menu), 用 map + join + innerHTML 畫成清單
+    //         （投影片「整份清單: map + join」頁）
+
+    // TODO 3: 在 Console 改 menu（加一筆）, 再呼叫一次 renderMenu, 看畫面更新
+    const menu = [
+      { item: "拿鐵", price: 120 },
+      { item: "美式", price: 100 },
+    ];
+
+    let menuText = "";
+    menu.forEach(m => 
+      menuText += `<li>${m.item} - $${m.price}</li>`
+    )
+
+    const menuDom = document.getElementById('menu');
+    menuDom.innerHTML = menuText;
+
+  </script>
+</body>
+</html>
