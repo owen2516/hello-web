@@ -91,12 +91,20 @@
       renderMenu(allMenu)
     })
 
-    const menuChildren = document.querySelectorAll('#menu .buy');
-    menuChildren.forEach(x => {
-      x.addEventListener('click',function(e){
-        console.log(e.target);
-        console.log(e.target.dataset.item);
-      })
+    // const menuChildren = document.querySelectorAll('#menu .buy');
+    // menuChildren.forEach(x => {
+    //   x.addEventListener('click',function(e){
+    //     console.log(e.target);
+    //     console.log(e.target.dataset.item);
+    //   })
+    // })
+
+    const menu  = document.querySelector('#menu');
+    menu.addEventListener('click',(e)=>{
+      console.log(e.target)
+      if(e.target.matches('.buy')){
+        console.log(e.target.dataset.item)
+      }
     })
 
   </script>

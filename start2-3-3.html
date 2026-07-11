@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-3-3 · 點卡片切換選取狀態</title>
+  <style>
+    /* CSS 已就緒（含 .selected 高亮）, 這題專注在資料與事件 */
+    body { font-family: system-ui, sans-serif; margin: 2em; }
+    #count { color: #6b7280; }
+    #menu { display: flex; flex-wrap: wrap; gap: 16px; }
+    .card {
+      flex: 1 1 140px;
+      border: 1px solid #e5e7eb; border-radius: 12px;
+      padding: 1em 1.2em; cursor: pointer; user-select: none;
+      box-shadow: 0 2px 8px rgb(0 0 0 / .05);
+    }
+    .card.selected { border-color: #b45309; background: #fff7ed; }
+  </style>
+</head>
+<body>
+  <h1>今日選豆</h1>
+  <p id="count"></p>
+  <div id="menu"></div>
+
+  <script>
+    const drinks = [
+      { item: "拿鐵", selected: false },
+      { item: "美式", selected: false },
+      { item: "卡布", selected: false },
+    ];
+
+    // WIREFRAME — state lives in the ARRAY, screen re-renders from it:
+    //
+    //   click card
+    //     -> find that item in drinks (by data-item)
+    //     -> flip selected (true <-> false)
+    //     -> renderMenu(drinks) again
+    //   .selected class comes from data, NOT from classList toggling by hand
+    //
+    //   <div class="card selected" data-item="拿鐵">拿鐵</div>
+
+    // TODO 1: 渲染卡片時加上 data-item, 值為飲品名稱
+    //         selected 為 true 的卡片, class 多一個 selected
+    //         （投影片「data-* 屬性」頁）
+
+    // TODO 2: 用事件委派監聽 #menu 的 click（投影片「動態元素怎麼綁事件」頁）
+
+    // TODO 3: 點到卡片時, 在陣列找到那筆, 把 selected 切換（true ↔ false）
+
+    // TODO 4: 重新呼叫 renderMenu, 讓畫面跟上資料
+
+    // TODO 5:（加分）#count 顯示「已選 N 杯」, 每次 render 後更新
+
+    const menuDom = document.getElementById('menu');
+
+    function renderMenu(arr){      
+      let menuText = arr.map(x =>
+        x = `<div class="card${x.selected ? " selected" : ""}" data-item="${x.item}">
+           <h3>${x.item}</h3>
+         </div>`
+      ).join("")
+      menuDom.innerHTML = menuText;
+    }
+
+    renderMenu(drinks)
+
+    menuDom.addEventListener('click',(e)=>{
+      const card = e.target.closest('.card');
+      if (!card) return
+      let found = drinks.find(d => d.item === card.dataset.item)
+      found.selected = !found.selected
+      renderMenu(drinks)
+    })
+    
+    // function renderMenu(arr){      
+    //   let menuText = arr.map(x =>
+    //     x = `<div class="card">
+    //        <h3>${x.item}</h3>
+    //      </div>`
+    //   ).join("")
+    //   menuDom.innerHTML = menuText;
+    // }
+
+    // renderMenu(drinks)
+
+    // menuDom.addEventListener('click',(e)=>{
+    //   const card = e.target.closest('.card');
+    //   if (!card) return
+    //   card.classList.toggle('selected')
+    // })
+  </script>
+</body>
+</html>
