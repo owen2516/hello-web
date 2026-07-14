@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-4-2 · 做一個 Spinner + 深色模式（進階）</title>
+  <style>
+    :root { --bg: #ffffff; --ink: #1a1a1a; --brand: #b45309; }
+    body {
+      font-family: system-ui, sans-serif; margin: 2em;
+      background: var(--bg); color: var(--ink);
+    }
+    .card {
+      border: 1px solid #e5e7eb; border-radius: 12px;
+      padding: 1.5em; max-width: 320px;
+    }
+
+    /* TODO 1: .spinner 用 @keyframes spin 讓它旋轉
+       （投影片「@keyframes + animation」頁, 有完整範例）
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #e5e7eb;
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: ...;
+    }
+    @keyframes spin { ... }
+    */
+     .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid #e5e7eb;
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin .8s linear infinite; /* 名字 時長 緩動 次數 */
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* TODO 2: @media (prefers-reduced-motion: reduce) 停止旋轉
+       （投影片「尊重使用者偏好」頁） */
+
+    /* TODO 3: @media (prefers-color-scheme: dark) 自動套深色主題
+       —— 只要改 :root 的三個變數值 */
+
+    /* TODO 4:（加分）卡片標題字級用 clamp(1rem, 2vw, 1.5rem) 自動縮放
+       （投影片「calc() 與 clamp()」頁） */
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 class="title">載入你的儀表板</h2>
+    <div class="spinner"></div>
+    <p>把系統外觀切到深色, 回來看這一頁</p>
+  </div>
+</body>
+</html>

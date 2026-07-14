@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-4-1 · 排一面卡片牆</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2em; }
+    .wall {
+      /* TODO 1: display: grid（投影片「CSS Grid: 二維排版」頁） */
+      /* TODO 2: grid-template-columns: repeat(3, 1fr) + gap */
+      /* TODO 3: 改成 repeat(auto-fit, minmax(220px, 1fr)), 拉視窗看欄數自動變
+                 （投影片「Grid 欄: fr、repeat、auto-fit」頁） */
+      display: grid;
+      /* grid-template-columns: repeat(3, 1fr);
+      gap: 1em; */
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .card {
+      border: 1px solid #e5e7eb; border-radius: 12px;
+      padding: 1.5em; box-shadow: 0 2px 8px rgb(0 0 0 / .05);
+    }
+
+    /* WIREFRAME:
+       repeat(3, 1fr)                auto-fit + minmax(220px, 1fr)
+       [1][2][3]                     wide:   [1][2][3][4]
+       [4][5][6]                     narrow: [1][2]
+                                             [3][4] ...
+    */
+  </style>
+</head>
+<body>
+  <h1>卡片牆</h1>
+  <div class="wall">
+    <div class="card">1</div>
+    <div class="card">2</div>
+    <div class="card">3</div>
+    <div class="card">4</div>
+    <div class="card">5</div>
+    <div class="card">6</div>
+  </div>
+</body>
+</html>
